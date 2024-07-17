@@ -1,0 +1,33 @@
+.header { 
+    height: 100px; 
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: white;
+    z-index: 1;
+}
+
+.logo_sena {
+    height: 80px; 
+    margin: 10px;
+}
+
+@media (max-width: 430px)  {
+    .logo_sena{
+        height: 70px;
+    }
+}
+
+.container_logo_sena{
+    width: 25%; 
+    text-align: center; 
+    border-right: 1.8px solid rgb(163, 153, 153);
+}
+
+.container_logo_sennova{
+    width: 75%; 
+    text-align: center;
+}
+

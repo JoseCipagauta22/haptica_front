@@ -1,0 +1,14 @@
+mat-card{
+    border: 1px solid #39A900;
+}
+
+@media screen and (min-width: 600px) {
+    .card-container {
+      display: flex;
+    }
+
+    mat-card{
+        width: 40%;
+    }
+}
+
