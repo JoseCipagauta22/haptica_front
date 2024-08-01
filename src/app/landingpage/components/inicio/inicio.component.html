@@ -1,16 +1,20 @@
 
 <div class="card-container">
-    <mat-card appearance="outlined" style="height: 291px; margin-bottom: 15px;" (click)="redirecTo('riesgos')">
-        <mat-card-content>riesgos</mat-card-content>
-    </mat-card>
-    
-    <mat-card appearance="outlined" style="height: 291px; margin-bottom: 15px;" (click)="redirecTo('emergencias')">
-        <mat-card-content>emergencias</mat-card-content>
-    </mat-card>
-    
-    <mat-card appearance="outlined" style="height: 291px; margin-bottom: 15px;" (click)="redirecTo('senalizaciones')">
-        <mat-card-content>señalizaciones</mat-card-content>
+    <mat-card *ngFor="let item of categories$ |async" appearance="outlined" style="height: 291px; margin-bottom: 15px;" (click)="redirecTo('categoria', item.id.toString())">
+        <div style="height: 100%; 
+                    background: url({{item.image}}); 
+                    background-size: cover; 
+                    background-position: center;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-weight: 600;
+                    font-size: 38px;
+                    letter-spacing: 2px;">
+            {{item.tittle}}
+        </div>
     </mat-card>
 </div>
 
-<button mat-raised-button (click)="redirecTo('cuestionario')" style="height: 60px; background-color: #39A900; color: white; border-radius: 20px; font-size: 24px;">Presentar test</button>
+<button mat-raised-button (click)="redirecTo('cuestionario')" style="height: 40px; background-color: #39A900; color: white; border-radius: 20px; font-size: 20px;">Presentar test</button>

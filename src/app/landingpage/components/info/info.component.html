@@ -1,13 +1,40 @@
 <button mat-raised-button class="button-come-back" (click)="redirecTo()">volver al inicio</button>
 
-<mat-card class="example-card" appearance="outlined">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header>
+<!-- <div class="card-container">
+  <mat-card *ngFor="let item of item$ |async" appearance="outlined" style="height: 291px; margin-bottom: 15px;">
+      <div style="height: 100%; 
+                  background: url({{url}}); 
+                  background-size: cover; 
+                  background-position: center;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-weight: 600;
+                  font-size: 38px;
+                  letter-spacing: 2px;">
+          {{item.tittle}}
+      </div>
+  </mat-card>
+</div> -->
 
-    <img mat-card-image src="../../../../assets/logoSena.png" alt="Photo of a Shiba Inu">
+<mat-card *ngFor="let item of item$ |async" class="example-card" appearance="outlined">
+
+    <div style="text-align: center; font-size: 18px;">
+      <h1>
+        {{item.tittle}}
+      </h1>
+    </div>
+    <!-- <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{item.tittle}}</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header> -->
+
+    <div style="text-align: center;">
+      <img mat-card-image src="../../../../assets/logoSena.png" alt="" style="height: 100px; width: 100px">
+    </div>
+
     <mat-card-content>
       <p>
         The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
@@ -16,3 +43,8 @@
       </p>
     </mat-card-content>
 </mat-card>
+
+<div *ngFor="let item of item$ |async" style="display: flex; justify-content: space-around;">
+  <button mat-raised-button class="button-come-back">Anterior</button>
+  <button mat-raised-button class="button-come-back" (click)="next(item.id)">siguiente</button>
+</div>
