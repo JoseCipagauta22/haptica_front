@@ -1,24 +1,6 @@
 <button mat-raised-button class="button-come-back" (click)="redirecTo()">volver al inicio</button>
 
-<!-- <div class="card-container">
-  <mat-card *ngFor="let item of item$ |async" appearance="outlined" style="height: 291px; margin-bottom: 15px;">
-      <div style="height: 100%; 
-                  background: url({{url}}); 
-                  background-size: cover; 
-                  background-position: center;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  color: white;
-                  font-weight: 600;
-                  font-size: 38px;
-                  letter-spacing: 2px;">
-          {{item.tittle}}
-      </div>
-  </mat-card>
-</div> -->
-
-<mat-card *ngFor="let item of item$ |async" class="example-card" appearance="outlined">
+<mat-card class="example-card" appearance="outlined" *ngIf="item$ |async as item">
 
     <div style="text-align: center; font-size: 18px;">
       <h1>
@@ -44,7 +26,14 @@
     </mat-card-content>
 </mat-card>
 
-<div *ngFor="let item of item$ |async" style="display: flex; justify-content: space-around;">
-  <button mat-raised-button class="button-come-back">Anterior</button>
-  <button mat-raised-button class="button-come-back" (click)="next(item.id)">siguiente</button>
+<div  style="width: 50%;">
+  <button  mat-button #myButton  class="button-come-back" >Anterior</button>
+</div>
+<div style="display: flex; margin-top: 15px;" class="test" *ngIf="item$ |async as item">
+
+
+  <div style="width: 50%;">
+    <button mat-raised-button class="button-come-back" [hidden]="disabled" *ngIf="len$ |async as len"  (click)="next(item.id, len)">siguiente</button>
+  </div>
+
 </div>
