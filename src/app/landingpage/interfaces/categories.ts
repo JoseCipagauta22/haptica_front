@@ -11,3 +11,9 @@ export interface Item {
   description?: string;
   image: string; 
 }
+
+export interface figure {
+  // id: number;
+  temperature: string;
+  state: number;
+}

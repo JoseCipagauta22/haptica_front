@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LandingpageService } from '../../services/landingpage.service';
 import { Category } from '../../interfaces/categories';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
@@ -15,6 +15,8 @@ export class InicioComponent implements OnInit {
   constructor(private router: Router, public landingpageService: LandingpageService) {}
   
   ngOnInit(): void {
+    // this.categories$ = EMPTY;
+
     this.categories$ = this.landingpageService.categories$;
     this.landingpageService.getCategories();
   }

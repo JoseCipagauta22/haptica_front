@@ -6,6 +6,7 @@ import { InfoComponent } from './components/info/info.component';
 import { CuestionarioComponent } from './components/cuestionario/cuestionario.component';
 import { ResultadoComponent } from './components/resultado/resultado.component';
 import { TestComponent } from './components/test/test.component';
+import { HapticaComponent } from './components/haptica/haptica.component';
 
 let routes: Routes = [
   {
@@ -31,6 +32,10 @@ let routes: Routes = [
       {
         path: 'inicio/test',
         component: TestComponent
+      },
+      {
+        path: 'inicio/haptica',
+        component: HapticaComponent
         // loadChildren: () => import('../users/users.module').then(childRouting => childRouting.UsersModule),
       },
 
