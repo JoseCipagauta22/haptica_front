@@ -15,11 +15,14 @@ export class LandingpageService {
   private CategoryBySubject = new BehaviorSubject<Category>(null);
   public CategoryBy$ = this.CategoryBySubject.asObservable();
 
-  private itemsSubject = new BehaviorSubject<Item[]>(null);
+  private itemsSubject = new BehaviorSubject<Item[]>([]);
   public items$ = this.itemsSubject.asObservable(); 
   
   private itemSubject = new BehaviorSubject<Item>(null);
   public item$ = this.itemSubject.asObservable(); 
+
+  private showCardItemSubject = new BehaviorSubject<boolean>(false);
+  public showCard$ = this.showCardItemSubject.asObservable(); 
 
 
 
@@ -29,7 +32,7 @@ export class LandingpageService {
     // this.httpClient.get<Category[]>('http://localhost:3000/categories').subscribe(data => {
     //   this.categoriesDataSubject.next(data);
     // });
-    this.categoriesDataSubject.next(null);
+    // this.categoriesDataSubject.next(null);
 
     const headers = new HttpHeaders({
       'ngrok-skip-browser-warning': 'true', // Añade la cabecera personalizada
@@ -37,8 +40,10 @@ export class LandingpageService {
       // 'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
     });
 
-    this.httpClient.get<Category[]>('https://8d53-2803-17a0-1014-7e-707c-6bbc-7878-bf26.ngrok-free.app/categories', {headers}).subscribe(data => {
+    this.httpClient.get<Category[]>('https://8aff-191-156-177-139.ngrok-free.app/categories', {headers}).subscribe(data => {
       this.categoriesDataSubject.next(data);
+      // console.log('this is', data);
+      
     });
   }
 
@@ -54,33 +59,29 @@ export class LandingpageService {
       // 'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
     });
 
-    this.httpClient.get<Category>(`https://8d53-2803-17a0-1014-7e-707c-6bbc-7878-bf26.ngrok-free.app/categories/${id}`,{headers}).subscribe(data => {
+    this.httpClient.get<Category>(`https://8aff-191-156-177-139.ngrok-free.app/categories/${id}`,{headers}).subscribe(data => {
       this.CategoryBySubject.next(data);
-      this.categoriesDataSubject.next(null);
     });
   }
 
-  // getItemsByCategory(){
-  //   this.items$ = this.CategoryBy$.pipe(
-  //     map(category => {return category.items})
-  //   );
-  // }
-
+  setItem(item: Item){
+    this.itemSubject.next(item);
+  }
 
   updateState(body: figure){
-
     const headers = new HttpHeaders({
       'ngrok-skip-browser-warning': 'true', // Añade la cabecera personalizada
-      'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
+      'Content-Type': 'application/json'
+      // 'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
     });
 
-    this.httpClient.put<figure>('https://8d53-2803-17a0-1014-7e-707c-6bbc-7878-bf26.ngrok-free.app/figures/1', body, {headers})
+    this.httpClient.put<figure>('https://8aff-191-156-177-139.ngrok-free.app/figures/1', body, {headers})
         .subscribe(data => console.log(data));
   }
 
   cleanCategoRyBy$(){
-    this.categoriesDataSubject.next(null);
-    
+    this.CategoryBySubject.next(null);
+    this.itemSubject.next(null);
   }
 
 }

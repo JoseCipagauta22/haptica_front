@@ -1,21 +1,27 @@
-<mat-card appearance="outlined" style="margin-bottom: 15px;">
-    <div style="text-align:center;">
-        <mat-card-title>spreadsheet</mat-card-title>
-    </div>
-    <mat-card-content>
-        riesgos Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, placeat officiis veritatis ad consectetur enim. Velit iure provident consectetur nemo doloremque praesentium repellat eligendi et. Numquam possimus facilis officiis impedit?
-        <br>
-        A. <mat-radio-button>Before</mat-radio-button>
-        <br>
-        B. <mat-radio-button>Before</mat-radio-button>
-        <br>
-        c. <mat-radio-button>Before</mat-radio-button>
-        <br>
-        d. <mat-radio-button>Before</mat-radio-button>
-    </mat-card-content>
-</mat-card>
 
-<div style="display: flex; justify-content: space-around;">
-    <button mat-raised-button class="button-come-back">Anterior</button>
-    <button mat-raised-button class="button-come-back" (click)="redirecTo('resultado')">Terminar</button>
+<div *ngIf="question$ |async as question">
+    <mat-card appearance="outlined" style="margin-bottom: 15px;">
+        <!-- <div style="text-align:center;">
+            <mat-card-title>spreadsheet</mat-card-title>
+        </div> -->
+        
+        <!-- <mat-card-title>{{question.question}}</mat-card-title> -->
+
+        <div style="margin-top: 30px; margin-left: 20px; margin-right: 20px; margin-bottom: 20px; font-weight: 600; font-size: 18px;">
+            {{question.question}}
+        </div>
+        
+        <mat-card-content>
+            <mat-radio-group style="display: flex; align-items: baseline; flex-direction: column; text-align: start; margin-bottom: 15px;">            
+                <mat-radio-button style="margin-top: 0px;" (change)="selectedAnswer(question.id ,answer.id)" *ngFor="let answer of question.answers" [value]="answer" [checked]="answer.isChecked">{{answer.answer}}</mat-radio-button>
+            </mat-radio-group>
+        </mat-card-content>
+    </mat-card>
+    
+    <div style="display: flex; justify-content: space-around;">
+        <button mat-raised-button class="button-come-back" (click)="back(question.id)">Anterior</button>
+        <button #nextTest mat-raised-button class="button-come-back" (click)="next(question.id)">Siguiente</button>
+        <button #finishButton mat-raised-button style="display: none;" class="button-come-back" (click)="finish()">Terminar</button>
+    </div>
 </div>
+

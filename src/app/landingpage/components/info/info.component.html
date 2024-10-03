@@ -20,27 +20,27 @@
   </mat-card>
 </div> -->
 
-<div *ngIf="showCard">
-  <mat-card appearance="outlined" style="margin-bottom: 15px;" *ngIf="item$ |async as item">
-    <!-- <mat-card-title>spreadsheet</mat-card-title> -->
-  
-    <div style="text-align: center; font-size: 18px;">
-      <h1>
-        {{item.tittle}}
-      </h1>
-    </div>
-  
-    <div style="text-align: center;">
-      <img mat-card-image src="../../../../assets/logoSena.png" alt="" style="height: 100px; width: 100px">
-    </div>
-  
-    <mat-card-content>
-      <p>
-        {{item.description}}
-      </p>
-    </mat-card-content>
-  </mat-card>
-</div>
+<!-- <div *ngIf="showCard"> -->
+<mat-card appearance="outlined" style="margin-bottom: 15px;" *ngIf="item$ |async as item">
+  <!-- <mat-card-title>spreadsheet</mat-card-title> -->
+
+  <div style="text-align: center; font-size: 18px;">
+    <h1>
+      {{item.tittle}}
+    </h1>
+  </div>
+
+  <div style="text-align: center;">
+    <img mat-card-image src="../../../../assets/categorias/S.G.S.S.T/logoSena.png" alt="" style="height: 150px; width: 150px">
+  </div>
+
+  <mat-card-content>
+    <p>
+      {{item.description}}
+    </p>
+  </mat-card-content>
+</mat-card>
+<!-- </div> -->
 
 
 
@@ -50,6 +50,6 @@
   </div>
   
   <div style="width: 50%;">
-    <button mat-raised-button #nextButton [disabled]="disabled" class="button-come-back" *ngIf="len$ |async as len"  (click)="next(item.id, len)">siguiente</button>
+    <button mat-raised-button #nextButton [disabled]="disabled" class="button-come-back" (click)="next(item.id)">siguiente</button>
   </div>
 </div>

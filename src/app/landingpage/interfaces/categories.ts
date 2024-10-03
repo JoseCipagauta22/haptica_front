@@ -16,4 +16,5 @@ export interface figure {
   // id: number;
   temperature: string;
   state: number;
+  figure: number;
 }

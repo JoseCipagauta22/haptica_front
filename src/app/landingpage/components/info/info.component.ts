@@ -1,105 +1,115 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LandingpageService } from '../../services/landingpage.service';
 import { Category, Item } from '../../interfaces/categories';
-import { EMPTY, map, Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-info',
   templateUrl: './info.component.html',
   styleUrl: './info.component.scss'
 })
-export class InfoComponent implements OnInit {
+export class InfoComponent implements OnInit, OnDestroy{
 
-  url: string = '../../../../assets/logoSena.png';
+  url: string = '../../../../assets';
   categoryId: string;
   categoryBy$: Observable<Category>;
+  category: Category;
   item$: Observable<Item>;
-  len$: Observable<Number>;
+  numberOfItems: number;
   disabled: boolean = false;  
   disabledBack: boolean = true;  
-  showCard: boolean = false;
+  private subscription: Subscription;
   
   @ViewChild('nextButton', {read: ElementRef}) nextButtonRef!: ElementRef<HTMLButtonElement>;
   @ViewChild('backButton', {read: ElementRef}) backButtonRef!: ElementRef<HTMLButtonElement>;
 
-  constructor(private router: Router, private route: ActivatedRoute, public landingpageService: LandingpageService, private renderer2:Renderer2) {
-    
-  }
-
+  constructor(private router: Router, private route: ActivatedRoute, public landingpageService: LandingpageService, private renderer2:Renderer2) {}
+  
   ngOnInit(): void {
     this.getCategoryById();
-    this.item$ = this.categoryBy$.pipe(
-      map(items => {        
-        return items?.items[0]
-      })
-    );
-    setTimeout(() => {
-      // console.log("Hello World!");
-      this.showCard = true;
-    }, 800);
-    this.len$ = this.categoryBy$.pipe(map(category => category.items.length));
-    
+    this.item$ = this.landingpageService.item$;   
     window.scroll(0,0);
   }
-
 
   getCategoryById(){
     this.route.params.subscribe((params)=> this.categoryId = params['id']);
     this.landingpageService.getCategoryBy(this.categoryId);
     this.categoryBy$ = this.landingpageService.CategoryBy$;
+
+    this.subscription = this.categoryBy$.subscribe((value)=>{
+      if (value) {
+        
+        // console.log('url' + this.url );
+        // console.log('value', value);
+
+
+        value.items.sort(function (a, b) {
+          if (a.id > b.id) {
+            return 1;
+          }
+          if (a.id < b.id) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+      });
+
+      this.url += '/' + value.tittle + '/' + value.items[0].image;
+        
+        
+
+        this.landingpageService.setItem(value.items[0]);
+        this.numberOfItems = value.items.length;
+        this.category = value;
+      }
+    });
   }
 
   redirecTo(){
     this.router.navigateByUrl('inicio');
   }
 
-  next(id, len){
-    this.item$ = this.categoryBy$.pipe(
-      map(items => {
-        // Encontramos el índice del objeto con el id específico
-        let position = items.items.findIndex(item => item.id === id);
+  next(id){
+    let position = this.category.items.findIndex(item => item.id === id);
+    if (position < this.numberOfItems - 1) {
+      position += 1
+    }
 
-        if (position < len - 1) {
-          position += 1
-        }
+    if (position == this.numberOfItems - 1 ) {
+      this.disabled = true;
+      this.renderer2.removeClass(this.nextButtonRef.nativeElement, 'button-come-back');
+      this.renderer2.addClass(this.nextButtonRef.nativeElement, 'button-come');
+    }
 
-        if (position == len - 1 ) {
-          this.disabled = true;
-          this.renderer2.removeClass(this.nextButtonRef.nativeElement, 'button-come-back');
-          this.renderer2.addClass(this.nextButtonRef.nativeElement, 'button-come');
-        }
-        return items.items[position];
-      })
-    );
-    
+    this.landingpageService.setItem(this.category.items[position]);
     this.disabledBack = false;
     this.renderer2.removeClass(this.backButtonRef.nativeElement, 'button-come');
     this.renderer2.addClass(this.backButtonRef.nativeElement, 'button-come-back');
   }
 
   back(id){
-    // id = Number(id) - 1;  
     this.disabled = false;
     this.renderer2.removeClass(this.nextButtonRef.nativeElement, 'button-come');
     this.renderer2.addClass(this.nextButtonRef.nativeElement, 'button-come-back');
 
-    this.item$ = this.categoryBy$.pipe(
-      map(items => {
-        // Encontramos el índice del objeto con el id específico
-        let position = items.items.findIndex(item => item.id === id);
+    let position = this.category.items.findIndex(item => item.id === id);
+    if (position > 0 ) {
+      position -= 1
+    }
 
-        if (position > 0 ) {
-          position -= 1
-        }
+    if (position == 0 ) {
+      this.disabledBack = true;
+      this.renderer2.removeClass(this.backButtonRef.nativeElement, 'button-come-back');
+      this.renderer2.addClass(this.backButtonRef.nativeElement, 'button-come');
+    }
+    this.landingpageService.setItem(this.category.items[position]);
+  }
 
-        if (position == 0 ) {
-          this.disabledBack = true;
-          this.renderer2.removeClass(this.backButtonRef.nativeElement, 'button-come-back');
-          this.renderer2.addClass(this.backButtonRef.nativeElement, 'button-come');
-        }
-        return items.items[position];
-      })
-    );
+  ngOnDestroy(): void {
+    this.landingpageService.cleanCategoRyBy$();
+    if (this.subscription) {      
+      this.subscription.unsubscribe();
+    }
   }
 }

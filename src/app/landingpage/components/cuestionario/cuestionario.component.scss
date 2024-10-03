@@ -11,3 +11,18 @@ mat-card{
     margin-bottom: 15px;
     // font-size: 24px;
 }
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    align-items: flex-start;
+  }
+  
+  .example-radio-button {
+    margin: 0px;
+  }
+
+  .mat-mdc-radio-button ~ .mat-mdc-radio-button {
+    margin-left: 16px;
+  }

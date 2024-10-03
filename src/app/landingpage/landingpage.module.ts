@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TestComponent } from './components/test/test.component';
 import { HapticaComponent } from './components/haptica/haptica.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProofService } from './services/proof.service';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LandingpageRoutingModule
   ],
   providers: [
-    LandingpageService
+    LandingpageService,
+    ProofService
   ],
 })
 export class LandingpageModule { }

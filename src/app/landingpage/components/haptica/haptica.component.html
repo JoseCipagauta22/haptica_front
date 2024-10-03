@@ -4,9 +4,20 @@
 
     <form [formGroup]="profileForm" (submit)="updateState()" style="padding: 20px;">
 
+        <mat-form-field>
+            <mat-label>Figura</mat-label>
+            <mat-select formControlName="selectFigure">
+              <mat-option value="0">Apagado</mat-option>
+              <mat-option value="1">Linea</mat-option>
+              <mat-option value="2">Pentagono</mat-option>
+              <mat-option value="3">Triangulo</mat-option>
+              <mat-option value="4">Cuadrado</mat-option>
+            </mat-select>
+        </mat-form-field>
+
         <!-- <div> -->
             <mat-form-field>
-                <mat-label>Choose an option</mat-label>
+                <mat-label>Sensacion termica</mat-label>
                 <mat-select formControlName="selectState">
                   <mat-option value="1">Apagado</mat-option>
                   <mat-option value="2">Caliente</mat-option>

@@ -1,6 +1,26 @@
 <button mat-raised-button class="button-come-back" (click)="redirecTo('inicio')">volver al inicio</button>
 
-<mat-card class="example-card" appearance="outlined">
+
+@if (result$ | async) {
+  <div style="margin-top: 20px;">
+    <img src="../../../../assets/passed-test.png" alt="">
+  </div>
+
+  <div style="font-size: 20px; font-weight: 800; color: rgb(58, 57, 57);">
+    Felicitaciones pasaste la prueba
+  </div>
+}@else {
+  <div style="margin-top: 20px;">
+    <img src="../../../../assets/lost-test-emojin.jpg" alt="">
+  </div>
+
+  <div style="font-size: 20px; font-weight: 800; color: rgb(58, 57, 57);">
+    Parece que algo fue mal, vuelve a presentar la prueba
+  </div>
+}
+
+
+<!-- <mat-card class="example-card" appearance="outlined">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Shiba Inu</mat-card-title>
@@ -15,4 +35,4 @@
         bred for hunting.
       </p>
     </mat-card-content>
-</mat-card>
+</mat-card> -->

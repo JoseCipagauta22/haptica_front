@@ -10,7 +10,8 @@ import { LandingpageService } from '../../services/landingpage.service';
 export class HapticaComponent implements OnInit {
 
   profileForm = this.formBuilder.group({
-    selectState: ['']
+    selectState: [''],
+    selectFigure: ['']
     // temperature: [''],
     // state: [0],
   });
@@ -19,7 +20,8 @@ export class HapticaComponent implements OnInit {
 
   ngOnInit(){
     this.profileForm.patchValue({
-      selectState: '1'
+      selectState: '1',
+      selectFigure: '0'
     });
   }
 
@@ -37,7 +39,7 @@ export class HapticaComponent implements OnInit {
       tempetarure = '15'; 
     }
 
-    this.landingpageService.updateState({temperature: tempetarure, state: Number(this.profileForm.value.selectState)});
+    this.landingpageService.updateState({temperature: tempetarure, state: Number(this.profileForm.value.selectState), figure: Number(this.profileForm.value.selectFigure)});
     
 
   }
