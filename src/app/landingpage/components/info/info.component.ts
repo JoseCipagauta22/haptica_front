@@ -11,7 +11,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class InfoComponent implements OnInit, OnDestroy{
 
-  url: string = '../../../../assets';
+  url: string = '../../../../assets/categorias';
   categoryId: string;
   categoryBy$: Observable<Category>;
   category: Category;

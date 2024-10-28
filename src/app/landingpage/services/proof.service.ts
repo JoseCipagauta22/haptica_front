@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Question } from '../interfaces/proof';
 import { BehaviorSubject, map } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,9 @@ export class ProofService {
       'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
     });
 
-    this.httpClient.get<Question[]>('https://8aff-191-156-177-139.ngrok-free.app/proof/proofs', {headers}).subscribe(data => {
+    // http://localhost:3000
+
+    this.httpClient.get<Question[]>(`${environment.API_URL}/proof/proofs`, {headers}).subscribe(data => {
 
       data.forEach(obj => {
         obj.answers.forEach(answerObj => { answerObj.isChecked = false});
