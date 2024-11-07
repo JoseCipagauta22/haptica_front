@@ -1,4 +1,4 @@
 export const environment = {
-    API_URL: 'https://haptica-back.onrender.com'
-    // API_URL: 'https://localhost:4200'
+    // API_URL: 'https://haptica-back.onrender.com'
+    API_URL: 'http://localhost:3000'
 };

@@ -1,8 +1,8 @@
 
-<div class="card-container">
-    <mat-card *ngFor="let item of categories$ |async" appearance="outlined" style="height: 291px; margin-bottom: 15px;" (click)="redirecTo('categoria', item.id.toString())">
-        <div style="height: 100%; 
-                    background: url({{item.image}}); 
+<div class="card-container" style="padding: 20px;">
+    <!-- <mat-card *ngFor="let item of categories$ |async" appearance="outlined" style="height: 291px; margin-bottom: 15px; margin: 20px" (click)="redirecTo('categoria', item.id.toString())">
+        <div style="height: 50%; 
+                    background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhaN5wAi8Dm0yWSgLWM4oTnR7nsw9bHgV4fcpkM1LPmx1lDItYcwKkBguHZk-nRl5-SpyqIUNwTELeckZ5PTuzUvUXC1lI7WGqmfgW_4ROpjYkOGzS378x_Qfr5tnN-YLqEmEXdYRa9NU/s640/seguridad.jpg'); 
                     background-size: cover; 
                     background-position: center;
                     display: flex;
@@ -14,7 +14,36 @@
                     letter-spacing: 2px;">
             {{item.tittle}}
         </div>
-    </mat-card>
+        <div style="text-align: left; margin: 15px;">
+            <mat-card-subtitle>S.G.S.S.T</mat-card-subtitle>
+        </div>
+        <div>
+            <mat-card-content>
+                quisquam distinctio saepe consectetur excepturi aliquam enim recusandae cupiditate laudantium incidunt ducimus quo!
+            </mat-card-content>
+        </div>
+    </mat-card> -->
+    <mat-card *ngFor="let item of categories$ |async" appearance="outlined" class="example-card" appearance="outlined" style="margin-bottom: 15px;">
+        <!-- <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header> -->
+        <img mat-card-image src="{{item.image}}" alt="Photo of a Shiba Inu" style="max-height: 250px;">
+        <mat-card-content style="text-align: justify;">
+            <div style="text-align: left; margin-top: 15px;">
+                <mat-card-subtitle style="font-size: 28px;">{{item.tittle}}</mat-card-subtitle>
+            </div>
+            <p>
+                {{item.description}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- <button mat-button>LIKE</button> -->
+          <button mat-button style="z-index: 0;" (click)="redirecTo('categoria', item.id.toString())">Ver más</button>
+        </mat-card-actions>
+      </mat-card>
+      
 </div>
 
 <button mat-raised-button (click)="redirecTo('cuestionario')" style="height: 50px; background-color: #39A900; color: white; border-radius: 20px; font-size: 20px;">Presentar test</button>

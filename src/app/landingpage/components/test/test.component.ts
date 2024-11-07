@@ -92,6 +92,8 @@ export class TestComponent implements OnInit, AfterViewInit{
         this.idItemCategoria = value.items[0].id;
         this.numberOfItems = value.items.length;
 
+        this.updateFigure(this.determinateTemperature(value.items[0].state,), value.items[0].state, value.items[0].figure);
+
         const utterance = new SpeechSynthesisUtterance(value.items[0].tittle);
         speechSynthesis.speak(utterance);
 
@@ -107,6 +109,7 @@ export class TestComponent implements OnInit, AfterViewInit{
     if (position < this.numberOfItems - 1) {
       position += 1
       this.idItemCategoria = this.categoria.items[position].id;
+      this.updateFigure(this.determinateTemperature(this.categoria.items[position].state), this.categoria.items[position].state, this.categoria.items[position].figure);
       const utterance = new SpeechSynthesisUtterance(this.categoria.items[position].tittle);
       speechSynthesis.speak(utterance);
 
@@ -121,6 +124,8 @@ export class TestComponent implements OnInit, AfterViewInit{
     if (position > 0 ) {
       position -= 1
       this.idItemCategoria = this.categoria.items[position].id;
+      this.updateFigure(this.determinateTemperature(this.categoria.items[position].state), this.categoria.items[position].state, this.categoria.items[position].figure);
+
       const utterance = new SpeechSynthesisUtterance(this.categoria.items[position].tittle);
       speechSynthesis.speak(utterance);
 
@@ -141,6 +146,11 @@ export class TestComponent implements OnInit, AfterViewInit{
     this.landingpageService.cleanCategoRyBy$();
   }
 
+
+  updateFigure(tempetarure: string, state: number, figure: number ){
+    this.landingpageService.updateState({temperature: tempetarure, state: Number(state), figure: Number(figure)});
+  }
+
   ngAfterViewInit(){
     let altura = document.documentElement.clientHeight;
     altura -= 170;
@@ -153,5 +163,19 @@ export class TestComponent implements OnInit, AfterViewInit{
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  determinateTemperature(state): string {
+    let tempetarure = '0';
+
+    if (state == '2') {
+      tempetarure = '50'; 
+    }
+
+    if (state == '3') {
+      tempetarure = '15'; 
+    }
+
+    return tempetarure;
   }
 }

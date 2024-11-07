@@ -1,14 +1,23 @@
-mat-card{
-    border: 1px solid #39A900;
-}
+// mat-card{
+//     border: 1px solid #39A900;
+// }
 
-@media screen and (min-width: 1000px) {
-    .card-container {
-      display: flex;
-    }
+// @media screen and (min-width: 700px) {
+//     .card-container {
+//       display: flex;
+//     }
 
-    mat-card{
-        width: 40%;
-    }
-}
+//     mat-card{
+//         width: 40%;
+//     }
+// }
+
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
 

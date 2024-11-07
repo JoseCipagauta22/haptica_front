@@ -2,6 +2,7 @@ export interface Category {
   id: number
   tittle: string;
   image: string;
+  description?: string;
   items?: Item[];
 }
 
@@ -10,6 +11,8 @@ export interface Item {
   tittle: string;
   description?: string;
   image: string; 
+  state: number;
+  figure: number;
 }
 
 export interface figure {

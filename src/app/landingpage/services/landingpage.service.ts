@@ -44,7 +44,7 @@ export class LandingpageService {
     console.log('env', environment.API_URL);
     
 
-    this.httpClient.get<Category[]>(`${environment.API_URL}/categories`, {headers}).subscribe(data => {
+    this.httpClient.get<Category[]>(`${environment.API_URL}/categories`).subscribe(data => {
       this.categoriesDataSubject.next(data);
       // console.log('this is', data);
       
