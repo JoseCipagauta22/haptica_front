@@ -178,6 +178,7 @@ export class TestComponent implements OnInit, AfterViewInit{
     let position = this.categoria.items.findIndex(item => item.id === id);
     if (position < this.numberOfItems - 1) {
       position += 1
+      console.log("test#####", this.categoria.items[position].id);
       this.idItemCategoria = this.categoria.items[position].id;
       this.updateFigure(this.determinateTemperature(this.categoria.items[position].state), this.categoria.items[position].state, this.categoria.items[position].figure);
       const utterance = new SpeechSynthesisUtterance(this.categoria.items[position].tittle);
