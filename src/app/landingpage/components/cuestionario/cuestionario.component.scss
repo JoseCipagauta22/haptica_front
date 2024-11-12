@@ -26,3 +26,33 @@ mat-card{
   .mat-mdc-radio-button ~ .mat-mdc-radio-button {
     margin-left: 16px;
   }
+
+  @media (min-width: 800px) {
+
+    .questionContainer {
+      width: 100%;
+      margin: auto;
+      padding-top: 10vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    mat-card {
+      margin: auto;
+      width: 600px;
+    }
+
+    .buttonContainer {
+      width: 600px;
+      margin: auto;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .button-come-back {
+      width: 200px;
+    }
+
+  }

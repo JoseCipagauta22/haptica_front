@@ -31,3 +31,21 @@
     text-align: center;
 }
 
+@media (min-width: 800px){
+
+    .header{
+        margin: auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .container_logo_sena{
+        max-width: 30%;
+    }
+
+    .container_logo_sennova{
+        max-width: 30%;
+    }
+}
+

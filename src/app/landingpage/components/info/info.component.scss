@@ -34,3 +34,25 @@ mat-card{
 .test:last-child{
   // justify-content: flex-end;
 }
+
+@media (min-width: 800px) {
+  body {
+    margin: 0;
+  }
+
+  mat-card {
+    margin: auto;
+    max-width: 1000px;
+  }
+  
+  img {
+    max-width: 30%;
+    max-height: 30vh;
+  }
+
+  .test {
+    margin: auto;
+    max-width: 700px;
+  }
+
+}

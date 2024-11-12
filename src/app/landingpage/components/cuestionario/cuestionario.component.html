@@ -1,5 +1,5 @@
 
-<div *ngIf="question$ |async as question">
+<div class="questionContainer" *ngIf="question$ |async as question">
     <mat-card appearance="outlined" style="margin-bottom: 15px;">
         <!-- <div style="text-align:center;">
             <mat-card-title>spreadsheet</mat-card-title>
@@ -18,7 +18,7 @@
         </mat-card-content>
     </mat-card>
     
-    <div style="display: flex; justify-content: space-around;">
+    <div class="buttonContainer" style="display: flex; justify-content: space-around;">
         <button mat-raised-button class="button-come-back" (click)="back(question.id)">Anterior</button>
         <button #nextTest mat-raised-button class="button-come-back" (click)="next(question.id)">Siguiente</button>
         <button #finishButton mat-raised-button style="display: none;" class="button-come-back" (click)="finish()">Terminar</button>
