@@ -35,7 +35,7 @@ export class TestComponent implements OnInit, AfterViewInit{
         this.test();
       }
       if (transcript.includes('instrucciones')) {
-        let texto2 = 'Si desea acceder a SGSST diga: SGSST. Para acceder a emergencias diga: emergencias. Para acceder a señalización y peligros diga: señalización y peligros. Si quiere repetir el menú diga: inicio. Si solo desea repetir las instrucciones diga: instrucciones. Recuerde tocar la pantalla una vez antes de hablar.';
+        let texto2 = 'Si desea acceder a S.G.S.S.T. diga: S.G.S.S.T. Para acceder a emergencias diga: emergencias. Para acceder a señalización y peligros diga: señalización y peligros. Si quiere repetir el menú diga: inicio. Si solo desea repetir las instrucciones diga: instrucciones. Recuerde tocar la pantalla una vez antes de hablar.';
         const utterance2 = new SpeechSynthesisUtterance(texto2);
         speechSynthesis.speak(utterance2);
       }
@@ -96,6 +96,7 @@ export class TestComponent implements OnInit, AfterViewInit{
   }*/
 
     test() {
+      this.updateFigure("0", 1, 0);
       let texto = 'Bienvenido a la aplicación web para introducción a la seguridad y salud en el trabajo del Centro industrial de mantenimiento y manufactura. A continuación escuchará el menú:';
       const utterance = new SpeechSynthesisUtterance(texto);
       
@@ -111,7 +112,7 @@ export class TestComponent implements OnInit, AfterViewInit{
     readTitlesAndDescriptions(index: number) {
       if (index >= this.data.length) {
         // Cuando ya no hay más elementos, lee el texto final (instrucciones)
-        let texto2 = 'Si desea acceder a SGSST diga: SGSST. Para acceder a emergencias diga: emergencias. Para acceder a señalización y peligros diga: señalización y peligros. Si quiere repetir el menú diga: inicio. Si solo desea repetir las instrucciones diga: instrucciones. Recuerde tocar la pantalla una vez antes de hablar.';
+        let texto2 = 'Si desea acceder a S.G.S.S.T. diga: S.G.S.S.T. Para acceder a emergencias diga: emergencias. Para acceder a señalización y peligros diga: señalización y peligros. Si quiere repetir el menú diga: inicio. Si solo desea repetir las instrucciones diga: instrucciones. Recuerde tocar la pantalla una vez antes de hablar.';
         const utterance2 = new SpeechSynthesisUtterance(texto2);
         speechSynthesis.speak(utterance2);
         return;
@@ -187,7 +188,7 @@ export class TestComponent implements OnInit, AfterViewInit{
       this.landingpageService.cleanCategoRyBy$();
 
       if(position == this.numberOfItems - 1 && this.categoria.id == 1){
-        let texto1 = 'Ha concluido el apartado de SGSST. Para continuar pulse una vez la pantalla y diga: emergencias';
+        let texto1 = 'Ha concluido el apartado de S.G.S.S.T. Para continuar pulse una vez la pantalla y diga: emergencias';
         const utterance1 = new SpeechSynthesisUtterance(texto1);
         speechSynthesis.speak(utterance1);
       }else if(position == this.numberOfItems - 1 && this.categoria.id == 2){
