@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Category, figure, Item } from '../interfaces/categories';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,10 @@ export class LandingpageService {
       // 'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
     });
 
-    this.httpClient.get<Category[]>('https://f286-177-93-43-62.ngrok-free.app/categories', {headers}).subscribe(data => {
+    console.log('env', environment.API_URL);
+    
+
+    this.httpClient.get<Category[]>(`${environment.API_URL}/categories`).subscribe(data => {
       this.categoriesDataSubject.next(data);
       // console.log('this is', data);
       
@@ -49,7 +53,7 @@ export class LandingpageService {
 
   getCategoryBy(id){
     
-    // this.httpClient.get<Category>(`http://localhost:3000/categories/${id}`).subscribe(data => {
+    // this.httpClient.get<Category>(https://haptica-back.onrender.com/categories/${id}).subscribe(data => {
     //   this.CategoryBySubject.next(data);
     // });
     
@@ -59,7 +63,7 @@ export class LandingpageService {
       // 'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
     });
 
-    this.httpClient.get<Category>(`https://f286-177-93-43-62.ngrok-free.app/categories/${id}`,{headers}).subscribe(data => {
+    this.httpClient.get<Category>(`${environment.API_URL}/categories/${id}`,{headers}).subscribe(data => {
       this.CategoryBySubject.next(data);
     });
   }
@@ -70,12 +74,12 @@ export class LandingpageService {
 
   updateState(body: figure){
     const headers = new HttpHeaders({
-      'ngrok-skip-browser-warning': 'true', // Añade la cabecera personalizada  
+      'ngrok-skip-browser-warning': 'true', // Añade la cabecera personalizada
       'Content-Type': 'application/json'
       // 'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
     });
 
-    this.httpClient.put<figure>('https://f286-177-93-43-62.ngrok-free.app/figures/1/', body, {headers})
+    this.httpClient.put<figure>(`${environment.API_URL}/figures/1`, body, {headers})
         .subscribe(data => console.log(data));
   }
 
