@@ -35,20 +35,35 @@ export class TestComponent implements OnInit, AfterViewInit{
         this.test();
       }
       if (transcript.includes('instrucciones')) {
-        let texto2 = 'Si desea acceder a S.G.S.S.T. diga: S.G.S.S.T. Para acceder a emergencias diga: emergencias. Para acceder a señalización y peligros diga: señalización y peligros. Si quiere repetir el menú diga: inicio. Si solo desea repetir las instrucciones diga: instrucciones. Recuerde tocar la pantalla una vez antes de hablar.';
+        let texto2 = 'Si desea acceder a S.G.S.S.T. diga: uno. Para acceder a emergencias diga: dos. Para acceder a señalización y peligros diga: tres. Si quiere repetir el menú diga: inicio. Si solo desea repetir las instrucciones diga: instrucciones. Recuerde tocar la pantalla una vez antes de hablar.';
         const utterance2 = new SpeechSynthesisUtterance(texto2);
         speechSynthesis.speak(utterance2);
       }
-      
+  /*    
       this.data.forEach(element => {       
         if (transcript.replace(/[^a-zA-Z0-9]/g, '').includes(element.tittle.toLowerCase().replace(/[^a-zA-Z0-9]/g, ''))) {
           this.landingpageService.getCategoryBy(element.id);
           this.info();
         }
       });
+  */
+
+      if (transcript.includes('uno') || transcript.includes('empezar')) {
+        this.landingpageService.getCategoryBy(1);
+        this.info();
+      }
+      if (transcript.includes('dos')) {
+        this.landingpageService.getCategoryBy(2);
+        this.info();
+      }
+      if (transcript.includes('tres')) {
+        this.landingpageService.getCategoryBy(3);
+        this.info();
+      }
+
 
       if (transcript.includes('siguiente')) {
-        this.next(this.idItemCategoria);
+        this.next(this.idItemCategoria);        
       }
 
       if (transcript.includes('anterior')) {
@@ -72,8 +87,10 @@ export class TestComponent implements OnInit, AfterViewInit{
     this.categories$.subscribe((value)=>this.data = value);
   }
 
-  /*test(){
-    let texto = 'Bienvenido a la aplicación web para introducción a la seguridad y salud en el trabajo del Centro industrial de mantenimiento y manufactura. A continuación escuchará el menú:';
+  test(){
+
+    this.updateFigure("0", 1, 0);
+    let texto = 'Bienvenido al inicio. A continuación escuchará el menú:';
     const utterance = new SpeechSynthesisUtterance(texto);
     speechSynthesis.speak(utterance);
 
@@ -83,18 +100,13 @@ export class TestComponent implements OnInit, AfterViewInit{
       speechSynthesis.speak(utterance);
     });
 
-    //this.data.forEach(element => {
-    //  const utterance = new SpeechSynthesisUtterance(element.description);
-    //  speechSynthesis.speak(utterance);
-    //});
-
-    let texto2 = 'Si desea acceder a SGSST diga:  SGSST. Para acceder a emergencias diga: emergencias. Para acceder a señalización y peligros diga: señalización y peligros. Si quiere repetir el menú diga: inicio. Si solo desea repetir las instrucciones diga: instrucciones. Recuerde tocar la pantalla una vez antes de hablar.';
+    let texto2 = 'Si desea acceder a S.G.S.S.T. diga: uno. Para acceder a emergencias diga: dos. Para acceder a señalización y peligros diga: tres. Si quiere repetir el menú diga: inicio. Si solo desea repetir las instrucciones diga: instrucciones. Recuerde tocar la pantalla una vez antes de hablar.';
     const utterance2 = new SpeechSynthesisUtterance(texto2);
     speechSynthesis.speak(utterance2);
     
 
-  }*/
-
+  }
+/*
     test() {
       this.updateFigure("0", 1, 0);
       let texto = 'Bienvenido a la aplicación web para introducción a la seguridad y salud en el trabajo del Centro industrial de mantenimiento y manufactura. A continuación escuchará el menú:';
@@ -136,9 +148,26 @@ export class TestComponent implements OnInit, AfterViewInit{
       // Reproduce el tittle
       speechSynthesis.speak(titleUtterance);
     }
-    
+*/   
 
+public instructionsCard(){
+  let texto1;
 
+      if (this.idItemCategoria === 1 || this.idItemCategoria === 5 || this.idItemCategoria === 11) {
+        texto1 =
+          'Para repetir la información diga: repetir. Para avanzar diga: siguiente. Si desea volver al menú principal diga: Inicio. Recuerde pulsar la pantalla una vez antes de hablar.';
+      }else {
+        texto1 =
+          'Para repetir la información diga: repetir. Para avanzar diga: siguiente. Para retroceder diga: anterior.';
+      }
+      if (this.idItemCategoria === 4 || this.idItemCategoria === 10 || this.idItemCategoria === 18) {
+        texto1 = ' ';
+      }
+  
+      const utterance1 = new SpeechSynthesisUtterance(texto1);
+      speechSynthesis.speak(utterance1);
+
+}
 
 
   presionarBoton(){
@@ -164,11 +193,10 @@ export class TestComponent implements OnInit, AfterViewInit{
 
         const utterance2 = new SpeechSynthesisUtterance(value.items[0].description);
         speechSynthesis.speak(utterance2);
-        this.landingpageService.cleanCategoRyBy$();
 
-        let texto1 = 'Para repetir la información diga: repetir. Para avanzar diga: siguiente. Para retroceder diga: anterior. Si desea volver al menú principal diga: Inicio.';
-        const utterance1 = new SpeechSynthesisUtterance(texto1);
-        speechSynthesis.speak(utterance1);
+        this.instructionsCard();
+
+      this.landingpageService.cleanCategoRyBy$();
 
       }
     });
@@ -187,17 +215,21 @@ export class TestComponent implements OnInit, AfterViewInit{
       speechSynthesis.speak(utterance2);
       this.landingpageService.cleanCategoRyBy$();
 
+      this.instructionsCard();
+
+
       if(position == this.numberOfItems - 1 && this.categoria.id == 1){
-        let texto1 = 'Ha concluido el apartado de S.G.S.S.T. Para continuar pulse una vez la pantalla y diga: emergencias';
+        let texto1 = 'Ha concluido el apartado de S.G.S.S.T. Para repetir la información diga: repetir. Para retroceder diga: anterior. Para continuar con el apartado de emergencias pulse una vez la pantalla y diga: dos';
         const utterance1 = new SpeechSynthesisUtterance(texto1);
         speechSynthesis.speak(utterance1);
+
       }else if(position == this.numberOfItems - 1 && this.categoria.id == 2){
-        let texto2 = 'Ha concluido el apartado de emergencias. Para continuar pulse una vez la pantalla y diga: señalización y peligros.';
+        let texto2 = 'Ha concluido el apartado de emergencias. Para repetir la información diga: repetir. Para retroceder diga: anterior. Para continuar con el apartado señalización y peligros pulse una vez la pantalla y diga: tres.';
         const utterance1 = new SpeechSynthesisUtterance(texto2);
         speechSynthesis.speak(utterance1);
       }else if(position == this.numberOfItems - 1 && this.categoria.id == 3){
-        let texto2 = 'Ha concluido el apartado de señalización y peligros. Felicitaciones ya tiene los conceptos básicos de seguridad y salud en el trabajo. Ahora puede volver al inicio.';
-        const utterance1 = new SpeechSynthesisUtterance(texto2);
+        let texto3 = 'Ha concluido el apartado de señalización y peligros. Felicitaciones ya tiene los conceptos básicos de seguridad y salud en el trabajo. Para repetir la información diga: repetir. Para retroceder diga: anterior. Para volver al inicio toque la pantalla una vez y diga: inicio.';
+        const utterance1 = new SpeechSynthesisUtterance(texto3);
         speechSynthesis.speak(utterance1);
       }
 
@@ -218,6 +250,7 @@ export class TestComponent implements OnInit, AfterViewInit{
       speechSynthesis.speak(utterance2);
       this.landingpageService.cleanCategoRyBy$();
     }
+    this.instructionsCard();
   }
 
   repeat(id){
@@ -229,6 +262,7 @@ export class TestComponent implements OnInit, AfterViewInit{
     const utterance2 = new SpeechSynthesisUtterance(this.categoria.items[position].description);
     speechSynthesis.speak(utterance2);
     this.landingpageService.cleanCategoRyBy$();
+    this.instructionsCard();
   }
 
 
