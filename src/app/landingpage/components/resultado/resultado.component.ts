@@ -50,10 +50,10 @@ export class ResultadoComponent implements OnInit, OnDestroy {
 
 		// Add content to the PDF.
 		doc.setFontSize(16);
-		doc.text('Senna CIMM Certifica que: ', 70, 50);
+		doc.text('El SENA CIMM certifica que: ', 70, 50);
 		doc.setFontSize(12);
 		doc.text(
-			userData.name + ' identificado con C.C ' + userData.numDoc + ' con el rol de ' + userData.role + ', culmino con exito la induccion a seguridad y salud en el trabajo',
+			userData.name + ' identificado con C.C ' + userData.numDoc + ' con el rol de ' + userData.role + ', culminó con exito la inducción a seguridad y salud en el trabajo.',
 			10,
 			60,
       { align: "justify", lineHeightFactor: 1.5, maxWidth: 190 }
