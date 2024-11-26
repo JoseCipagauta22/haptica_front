@@ -11,5 +11,11 @@ export interface Question {
     isChecked?: boolean;
   }
 
+  export interface User {
+    name: string,
+    numDoc: string,
+    role: string
+  }
+
 
   

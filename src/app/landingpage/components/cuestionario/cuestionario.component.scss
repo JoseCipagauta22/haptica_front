@@ -2,6 +2,11 @@ mat-card{
     border: 1px solid #39A900;
 }
 
+mat-form-field{
+  // width: 400px;
+  min-width: 280px;
+}
+
 .button-come-back {
     // height: 60px; 
     background-color: #39A900 !important; 

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Question } from '../interfaces/proof';
+import { Question, User } from '../interfaces/proof';
 import { BehaviorSubject, map } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
@@ -15,55 +15,36 @@ export class ProofService {
   private questionSubject = new BehaviorSubject<Question>(null);
   public question$ = this.questionSubject.asObservable();
 
+  private userSubject = new BehaviorSubject<User>(null);
+  public user$ = this.userSubject.asObservable();
+
   private resultSubject = new BehaviorSubject<boolean>(false);
   public result$ = this.resultSubject.asObservable();
 
   constructor(private httpClient: HttpClient) { }
 
   public getQuestions() {
-    // this.httpClient.get<Question[]>('http://localhost:3000/proof/proofs').subscribe(data => {
-
-    //   data.forEach(obj => {
-    //     obj.answers.forEach(answerObj => { answerObj.isChecked = false});
-    //   }) 
-
-    //   this.questionsDataSubject.next(data);
-    // });
-
-    const headers = new HttpHeaders({
-      'ngrok-skip-browser-warning': 'true', // Añade la cabecera personalizada
-      'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
-    });
-
-    // http://localhost:3000
-
-    this.httpClient.get<Question[]>(`${environment.API_URL}/proof/proofs`, {headers}).subscribe(data => {
-
+    this.httpClient.get<Question[]>(`${environment.API_URL}/proof/proofs`).subscribe(data => {
       data.forEach(obj => {
         obj.answers.forEach(answerObj => { answerObj.isChecked = false});
       }) 
-
       this.questionsDataSubject.next(data);
     });
-
-    // const headers = new HttpHeaders({
-    //   'ngrok-skip-browser-warning': 'true', // Añade la cabecera personalizada
-    //   'Content-Type': 'application/json'
-    //   // 'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
-    // });
-
-    // this.httpClient.get<Category[]>('https://0f35-2803-17a0-1014-7e-80a-4d2a-6b8c-c267.ngrok-free.app/categories', {headers}).subscribe(data => {
-    //   this.categoriesDataSubject.next(data);
-    // });
   }
 
   setQuestion(question: Question){
     this.questionSubject.next(question);
   }
 
+  setUser(user: User){
+    this.userSubject.next(user);
+  }
+
   resultTest(counter: number, len: number){
     if (counter > len / 2) {
       this.resultSubject.next(true);
+    }else{
+      this.resultSubject.next(false);
     }
   }
 

@@ -1,6 +1,4 @@
 <button mat-raised-button class="button-come-back" (click)="redirecTo('inicio')">Volver al inicio</button>
-
-
 @if (result$ | async) {
   <div style="margin-top: 20px;">
     <img src="../../../../assets/passed-test.png" alt="">
@@ -18,21 +16,6 @@
     Parece que algo fue mal, vuelve a presentar la prueba.
   </div>
 }
-
-
-<!-- <mat-card class="example-card" appearance="outlined">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header>
-
-    <img mat-card-image src="../../../../assets/logoSena.png" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
-    </mat-card-content>
-</mat-card> -->
+<div style="width: 100%; align-items: center; margin-top: 20px;">
+  <button *ngIf="result$ | async" mat-raised-button class="button-come-back" (click)="pdf()">Descargar Certificado</button>
+</div>

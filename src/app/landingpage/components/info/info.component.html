@@ -1,29 +1,6 @@
 <button mat-raised-button class="button-come-back" (click)="redirecTo()">Volver al inicio</button>
 
-<!-- <div>
-  <mat-card class="example-card" appearance="outlined" *ngIf="item$ |async as item">
-      <div style="text-align: center; font-size: 18px;">
-        <h1>
-          {{item.tittle}}
-        </h1>
-      </div>
-  
-      <div style="text-align: center;">
-        <img mat-card-image src="../../../../assets/logoSena.png" alt="" style="height: 100px; width: 100px">
-      </div>
-  
-      <mat-card-content>
-        <p>
-          {{item.description}}
-        </p>
-      </mat-card-content>
-  </mat-card>
-</div> -->
-
-<!-- <div *ngIf="showCard"> -->
 <mat-card appearance="outlined" style="margin-bottom: 15px;" *ngIf="item$ |async as item">
-  <!-- <mat-card-title>spreadsheet</mat-card-title> -->
-
   <div style="text-align: center; font-size: 18px;">
     <h1>
       {{item.tittle}}
@@ -34,17 +11,12 @@
     <img mat-card-image src="../../../../assets/{{item.image}}" alt="" style=" width: 70%">
   </div>
 
-      <!-- [[}}}ççç]] -->
-
   <mat-card-content>
     <p style="text-align: justify;">
       {{item.description}}
     </p>
   </mat-card-content>
 </mat-card>
-<!-- </div> -->
-
-
 
 <div style="display: flex; margin-top: 15px;" class="test" *ngIf="item$ |async as item">
   <div  style="width: 50%;">

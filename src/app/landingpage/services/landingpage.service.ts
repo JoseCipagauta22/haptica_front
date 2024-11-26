@@ -25,45 +25,16 @@ export class LandingpageService {
   private showCardItemSubject = new BehaviorSubject<boolean>(false);
   public showCard$ = this.showCardItemSubject.asObservable(); 
 
-
-
   constructor(private router: Router, private httpClient: HttpClient) { }
 
   public getCategories() {
-    // this.httpClient.get<Category[]>('http://localhost:3000/categories').subscribe(data => {
-    //   this.categoriesDataSubject.next(data);
-    // });
-    // this.categoriesDataSubject.next(null);
-
-    const headers = new HttpHeaders({
-      'ngrok-skip-browser-warning': 'true', // Añade la cabecera personalizada
-      'Content-Type': 'application/json'
-      // 'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
-    });
-
-    console.log('env', environment.API_URL);
-    
-
     this.httpClient.get<Category[]>(`${environment.API_URL}/categories`).subscribe(data => {
       this.categoriesDataSubject.next(data);
-      // console.log('this is', data);
-      
     });
   }
 
   getCategoryBy(id){
-    
-    // this.httpClient.get<Category>(https://haptica-back.onrender.com/categories/${id}).subscribe(data => {
-    //   this.CategoryBySubject.next(data);
-    // });
-    
-    const headers = new HttpHeaders({
-      'ngrok-skip-browser-warning': 'true', // Añade la cabecera personalizada
-      'Content-Type': 'application/json'
-      // 'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
-    });
-
-    this.httpClient.get<Category>(`${environment.API_URL}/categories/${id}`,{headers}).subscribe(data => {
+    this.httpClient.get<Category>(`${environment.API_URL}/categories/${id}`).subscribe(data => {
       this.CategoryBySubject.next(data);
     });
   }
@@ -73,13 +44,7 @@ export class LandingpageService {
   }
 
   updateState(body: figure){
-    const headers = new HttpHeaders({
-      'ngrok-skip-browser-warning': 'true', // Añade la cabecera personalizada
-      'Content-Type': 'application/json'
-      // 'User-Agent': 'CustomUserAgent/1.0'   // O usa un User-Agent personalizado
-    });
-
-    this.httpClient.put<figure>(`${environment.API_URL}/figures/1`, body, {headers})
+    this.httpClient.put<figure>(`${environment.API_URL}/figures/1`, body)
         .subscribe(data => console.log(data));
   }
 

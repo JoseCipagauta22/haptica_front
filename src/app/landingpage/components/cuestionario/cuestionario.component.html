@@ -1,5 +1,46 @@
 
-<div class="questionContainer" *ngIf="question$ |async as question">
+<form *ngIf="!showQuiz" [formGroup]="profileForm" (submit)="getUserInfo()" style="padding: 20px;">
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" formControlName="name">
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <mat-hint>Hint</mat-hint> -->
+        </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Nº Documento</mat-label>
+            <input matInput placeholder="Nº Documento" formControlName="numDoc">
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <mat-hint>Hint</mat-hint> -->
+        </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="role">
+              <!-- @for (food of foods; track food) { -->
+              <mat-option value="Funcionario">{{'Funcionario'}}</mat-option>
+              <mat-option value="Contratista">{{'Contratista'}}</mat-option>
+              <mat-option value="Visitante">{{'Visitante'}}</mat-option>
+              <!-- } -->
+            </mat-select>
+        </mat-form-field>
+    </p>
+
+    <div style="text-align: center;">
+        <button [disabled]="!profileForm.valid" mat-stroked-button color="primary" type="submit" style="width: 50%;" >Continuar</button>
+    </div>
+</form>
+
+
+
+
+<div class="questionContainer" *ngIf="showQuiz && question$ |async as question">
+
     <mat-card appearance="outlined" style="margin-bottom: 15px;">
         <!-- <div style="text-align:center;">
             <mat-card-title>spreadsheet</mat-card-title>
@@ -19,7 +60,8 @@
     </mat-card>
     
     <div class="buttonContainer" style="display: flex; justify-content: space-around;">
-        <button mat-raised-button class="button-come-back" (click)="back(question.id)">Anterior</button>
+        <button *ngIf="this.position == 0" mat-raised-button class="button-come-back" (click)="backForm()">Anterior</button>
+        <button *ngIf="this.position >= 1" mat-raised-button class="button-come-back" (click)="back(question.id)">Anterior</button>
         <button #nextTest mat-raised-button class="button-come-back" (click)="next(question.id)">Siguiente</button>
         <button #finishButton mat-raised-button style="display: none;" class="button-come-back" (click)="finish()">Terminar</button>
     </div>

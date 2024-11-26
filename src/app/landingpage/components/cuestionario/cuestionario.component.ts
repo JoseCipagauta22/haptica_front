@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ProofService } from '../../services/proof.service';
 import { map, Observable, Subscription } from 'rxjs';
 import { Question } from '../../interfaces/proof';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cuestionario',
@@ -19,8 +20,15 @@ export class CuestionarioComponent implements OnInit, OnDestroy {
   position: number;
   data: Question[];
   private subscription: Subscription;
+  showQuiz: boolean = false;
 
-  constructor(private router: Router, private proofService: ProofService, private renderer2:Renderer2) { }
+  profileForm = this.formBuilder.group({
+    name: ['', Validators.required],
+    numDoc: ['', Validators.required],
+    role: ['',Validators.required]
+  });
+
+  constructor(private router: Router, private proofService: ProofService, private renderer2:Renderer2, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.proofService.getQuestions();
@@ -35,6 +43,7 @@ export class CuestionarioComponent implements OnInit, OnDestroy {
   }
 
   setQuestion(index: number){
+    this.position = 0;
     this.subscription = this.proofService.questions$.subscribe(questions => {
       this.data = questions;
       this.proofService.setQuestion(this.data[index]);
@@ -57,6 +66,7 @@ export class CuestionarioComponent implements OnInit, OnDestroy {
     this.renderer2.removeStyle(this.nextButtonRef.nativeElement, 'display');
     this.renderer2.setStyle(this.finishButtonRef.nativeElement, 'display', 'none');
     this.position = this.data.findIndex(question => question.id === id);
+
     if (this.position > 0 ) {
       this.position -= 1;
       this.proofService.setQuestion(this.data[this.position]);
@@ -88,7 +98,17 @@ export class CuestionarioComponent implements OnInit, OnDestroy {
       });  
     });
     this.proofService.resultTest(counter, this.len);
+    const {name, numDoc, role} = this.profileForm.value;
+    this.proofService.setUser({name: name, numDoc: numDoc, role: role});
     this.router.navigateByUrl(`inicio/resultado`);
+  }
+
+  getUserInfo(){
+    this.showQuiz = true;
+  }
+
+  backForm(){
+    this.showQuiz = false;
   }
 
   ngOnDestroy(): void {
