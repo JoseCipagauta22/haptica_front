@@ -52,11 +52,11 @@ export class TestComponent implements OnInit, AfterViewInit{
         this.landingpageService.getCategoryBy(1);
         this.info();
       }
-      if (transcript.includes('dos')) {
+      if (transcript.includes('dos') || transcript.includes('emergencias')) {
         this.landingpageService.getCategoryBy(2);
         this.info();
       }
-      if (transcript.includes('tres')) {
+      if (transcript.includes('tres') || transcript.includes('señalizacion')) {
         this.landingpageService.getCategoryBy(3);
         this.info();
       }
@@ -219,12 +219,12 @@ public instructionsCard(){
 
 
       if(position == this.numberOfItems - 1 && this.categoria.id == 1){
-        let texto1 = 'Ha concluido el apartado de S.G.S.S.T. Para repetir la información diga: repetir. Para retroceder diga: anterior. Para continuar con el apartado de emergencias pulse una vez la pantalla y diga: dos';
+        let texto1 = 'Ha concluido el apartado de S.G.S.S.T. Para repetir la información diga: repetir. Para retroceder diga: anterior. Para continuar con el apartado de emergencias pulse una vez la pantalla y diga: emergencias';
         const utterance1 = new SpeechSynthesisUtterance(texto1);
         speechSynthesis.speak(utterance1);
 
       }else if(position == this.numberOfItems - 1 && this.categoria.id == 2){
-        let texto2 = 'Ha concluido el apartado de emergencias. Para repetir la información diga: repetir. Para retroceder diga: anterior. Para continuar con el apartado señalización y peligros pulse una vez la pantalla y diga: tres.';
+        let texto2 = 'Ha concluido el apartado de emergencias. Para repetir la información diga: repetir. Para retroceder diga: anterior. Para continuar con el apartado señalización y peligros pulse una vez la pantalla y diga: señalizacion.';
         const utterance1 = new SpeechSynthesisUtterance(texto2);
         speechSynthesis.speak(utterance1);
       }else if(position == this.numberOfItems - 1 && this.categoria.id == 3){
