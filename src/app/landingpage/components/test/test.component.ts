@@ -56,7 +56,7 @@ export class TestComponent implements OnInit, AfterViewInit{
         this.landingpageService.getCategoryBy(2);
         this.info();
       }
-      if (transcript.includes('tres') || transcript.includes('señalizacion')) {
+      if (transcript.includes('tres') || transcript.includes('señalización')) {
         this.landingpageService.getCategoryBy(3);
         this.info();
       }
@@ -224,7 +224,7 @@ public instructionsCard(){
         speechSynthesis.speak(utterance1);
 
       }else if(position == this.numberOfItems - 1 && this.categoria.id == 2){
-        let texto2 = 'Ha concluido el apartado de emergencias. Para repetir la información diga: repetir. Para retroceder diga: anterior. Para continuar con el apartado señalización y peligros pulse una vez la pantalla y diga: señalizacion.';
+        let texto2 = 'Ha concluido el apartado de emergencias. Para repetir la información diga: repetir. Para retroceder diga: anterior. Para continuar con el apartado señalización y peligros pulse una vez la pantalla y diga: señalización.';
         const utterance1 = new SpeechSynthesisUtterance(texto2);
         speechSynthesis.speak(utterance1);
       }else if(position == this.numberOfItems - 1 && this.categoria.id == 3){
